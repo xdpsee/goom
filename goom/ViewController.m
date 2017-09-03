@@ -1,6 +1,7 @@
 #import "ViewController.h"
 
 #import "GoomViewController.h"
+#import "TestController.h"
 
 @implementation ViewController
 
@@ -25,7 +26,9 @@
 }
 
 - (IBAction) buttonProjectMClicked:(id)sender {
-    
+    [self presentViewController:[[TestController alloc] init]
+                       animated:YES
+                     completion:nil];
 }
 
 @end
