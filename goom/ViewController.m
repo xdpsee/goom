@@ -27,7 +27,9 @@
 
 - (IBAction) buttonProjectMClicked:(id)sender {
 
-    
+    [self presentViewController:[[GoomViewController alloc] init]
+                       animated:YES
+                     completion:nil];
     
 }
 

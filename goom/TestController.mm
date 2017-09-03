@@ -17,6 +17,7 @@
 
 #define HEADROOM_DECIBEL 3.0f
 static const float headroom = powf(10.0f, -HEADROOM_DECIBEL * 0.025);
+static short samples[2][512];
 
 @interface TestController ()<SuperpoweredIOSAudioIODelegate> {
     GoomView* _testView;
@@ -75,7 +76,7 @@ static const float headroom = powf(10.0f, -HEADROOM_DECIBEL * 0.025);
         NSLog(@"Failed to create ES context");
     }
 
-    _testView = [[GoomView alloc] initWithFrame:CGRectMake(21, 41, 320, 240) context:_context];
+    _testView = [[GoomView alloc] initWithFrame:CGRectMake(0, 20, 375, 282) context:_context];
 
     [self.view addSubview:_testView];
 
@@ -84,7 +85,7 @@ static const float headroom = powf(10.0f, -HEADROOM_DECIBEL * 0.025);
     if (posix_memalign((void **)&stereoBuffer, 16, 4096 + 128) != 0) abort(); // Allocating memory, aligned to 16.
 
     playerA = new SuperpoweredAdvancedAudioPlayer((__bridge void *)self, playerEventCallbackA, 44100, 0);
-    playerA->open([[[NSBundle mainBundle] pathForResource:@"Thriller" ofType:@"mp3"] fileSystemRepresentation]);
+    playerA->open([[[NSBundle mainBundle] pathForResource:@"Dangerous" ofType:@"mp3"] fileSystemRepresentation]);
     playerA->syncMode = SuperpoweredAdvancedAudioPlayerSyncMode_TempoAndBeat;
 
     roll = new SuperpoweredRoll(44100);
@@ -133,7 +134,7 @@ static bool audioProcessing(void *clientdata, float **buffers, unsigned int inpu
         self->flanger->setSamplerate(samplerate);
     };
 
-    short samples[2][512];
+    
     memcpy(&samples[0], buffers[0], 512);
     memcpy(&samples[1], buffers[1], 512);
     

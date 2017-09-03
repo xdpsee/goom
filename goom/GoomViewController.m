@@ -176,7 +176,7 @@ GLint uniforms[NUM_UNIFORMS];
     
     int select = rand() % 4;
     
-    NSURL* url = urls[select];
+    NSURL* url = urls[3];
     
     AEAudioFilePlayer* filePlayer = [AEAudioFilePlayer audioFilePlayerWithURL:url audioController:_audioController error:&error];
     filePlayer.removeUponFinish = NO;
