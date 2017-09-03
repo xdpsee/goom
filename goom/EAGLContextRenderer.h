@@ -22,6 +22,6 @@
 
 - (void) tearDownGL;
 
-- (void) render:(OGLESMappedTexture *) texture to:(GLKView *) glkView;
+- (void) render:(OGLESMappedTexture *) texture to:(GLKView *) glkView inRect:(CGRect) rect;
 
 @end

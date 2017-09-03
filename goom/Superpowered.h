@@ -28,4 +28,6 @@
 - (void)toggle; // Start/stop Superpowered.
 - (bool)toggleFx:(int)index; // Enable/disable fx.
 
+- (void) stop;
+
 @end

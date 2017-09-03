@@ -42,12 +42,6 @@
     return self;
 }
 
-- (void) setResolution:(uint)width height:(uint)height {
-    if (_pluginInfo != NULL) {
-        goom_set_resolution(_pluginInfo, width, height);
-    }
-}
-
 - (void) setScreenBuffer:(void *)buffer {
     if (_pluginInfo != NULL) {
         goom_set_screenbuffer(_pluginInfo, buffer);

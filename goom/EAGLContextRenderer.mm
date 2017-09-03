@@ -12,8 +12,7 @@
 enum
 {
     ATTRIB_VERTEX,
-    ATTRIB_TEXCOORD,
-    NUM_ATTRIBUTES
+    ATTRIB_TEXCOORD
 };
 
 // Uniform index.
@@ -221,10 +220,9 @@ static GLint uniforms[NUM_UNIFORMS];
 
 }
 
-- (void)render:(OGLESMappedTexture *)mappedTexture to:(GLKView *)glkView {
+- (void)render:(OGLESMappedTexture *)mappedTexture to:(GLKView *)glkView inRect:(CGRect) rect{
 
     glActiveTexture(GL_TEXTURE0);
-
 
     if (!mappedTexture.isReady) {
         NSLog(@"mappedTexture is not ready");
@@ -301,10 +299,14 @@ static GLint uniforms[NUM_UNIFORMS];
     // covers the entire screen.
 
     GLfloat quadVertexData[] = {
-            static_cast<GLfloat>(-1 * normalizedSamplingSize.width), static_cast<GLfloat>(-1 * normalizedSamplingSize.height),
-            static_cast<GLfloat>(normalizedSamplingSize.width), static_cast<GLfloat>(-1 * normalizedSamplingSize.height),
-            static_cast<GLfloat>(-1 * normalizedSamplingSize.width), static_cast<GLfloat>(normalizedSamplingSize.height),
-            static_cast<GLfloat>(normalizedSamplingSize.width), static_cast<GLfloat>(normalizedSamplingSize.height),
+            static_cast<GLfloat>(-1 * normalizedSamplingSize.width),
+            static_cast<GLfloat>(-1 * normalizedSamplingSize.height),
+            static_cast<GLfloat>(normalizedSamplingSize.width),
+            static_cast<GLfloat>(-1 * normalizedSamplingSize.height),
+            static_cast<GLfloat>(-1 * normalizedSamplingSize.width),
+            static_cast<GLfloat>(normalizedSamplingSize.height),
+            static_cast<GLfloat>(normalizedSamplingSize.width),
+            static_cast<GLfloat>(normalizedSamplingSize.height),
     };
 
     static const GLushort quadVertexDataIndexes[] = { 0, 1, 2, 3 };
@@ -337,10 +339,14 @@ static GLint uniforms[NUM_UNIFORMS];
 
     CGRect textureSamplingRect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     GLfloat quadTextureData[] =  {
-            static_cast<GLfloat>(CGRectGetMinX(textureSamplingRect)), static_cast<GLfloat>(CGRectGetMaxY(textureSamplingRect)),
-            static_cast<GLfloat>(CGRectGetMaxX(textureSamplingRect)), static_cast<GLfloat>(CGRectGetMaxY(textureSamplingRect)),
-            static_cast<GLfloat>(CGRectGetMinX(textureSamplingRect)), static_cast<GLfloat>(CGRectGetMinY(textureSamplingRect)),
-            static_cast<GLfloat>(CGRectGetMaxX(textureSamplingRect)), static_cast<GLfloat>(CGRectGetMinY(textureSamplingRect))
+            static_cast<GLfloat>(CGRectGetMinX(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMaxY(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMaxX(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMaxY(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMinX(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMinY(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMaxX(textureSamplingRect)),
+            static_cast<GLfloat>(CGRectGetMinY(textureSamplingRect))
     };
 
     if (_textureVBO == 0) {

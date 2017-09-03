@@ -70,6 +70,12 @@
     };
 }
 
+- (void) stop {
+    if (started) {
+        [output stop];
+    }
+}
+
 - (void)togglePlayback { // Play/pause.
     player->togglePlayback();
 }

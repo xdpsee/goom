@@ -85,6 +85,9 @@ GLint uniforms[NUM_UNIFORMS];
 
 - (void)dealloc {
 
+
+
+
     _glkView = nil;
 
     [_goomObject close];
@@ -100,6 +103,7 @@ GLint uniforms[NUM_UNIFORMS];
     [_eaglContextRenderer tearDownGL];
     _eaglContextRenderer = nil;
 
+    [superpowered stop];
     superpowered = nil;
 
 }
@@ -244,7 +248,7 @@ GLint uniforms[NUM_UNIFORMS];
     }
 
     if (mappedTexture != nil) {
-        [_eaglContextRenderer render:mappedTexture to:_glkView];
+        [_eaglContextRenderer render:mappedTexture to:_glkView inRect:rect];
     }
 }
 

@@ -12,8 +12,6 @@
 
 - (id) initWithWidth:(uint) width height:(uint)height;
 
-- (void) setResolution:(uint) width height:(uint) height;
-
 - (void) setScreenBuffer:(void *)buffer;
 
 - (void) update:(short[2][512]) data;
