@@ -3,20 +3,21 @@
 // Copyright (c) 2017 JEECH. All rights reserved.
 //
 
-#import "TestView.h"
+#import "GoomView.h"
 #import "GoomObject.h"
 #import "EAGLContextRenderer.h"
 
-@interface TestView () {
+@interface GoomView () {
     GoomObject *_goomObject;
     EAGLContextRenderer *_eaglContextRenderer;
     OGLESMappedTexture *_mainTexture;
 
-    uint32_t * _videoBuffer;
     short _samples[2][512];
 
     NSTimer* _timer;
     BOOL _rendering;
+    NSTimeInterval _timestamp;
+    BOOL _samplesUpdated;
 }
 
 - (instancetype)init;
@@ -27,7 +28,7 @@
 
 @end
 
-@implementation TestView
+@implementation GoomView
 
 
 - (void)dealloc {
@@ -44,11 +45,6 @@
 
     [_eaglContextRenderer tearDownGL];
     _eaglContextRenderer = nil;
-
-    if (_videoBuffer != nil) {
-        free(_videoBuffer);
-        _videoBuffer = nil;
-    }
 }
 
 // private
@@ -75,7 +71,17 @@
     }
 
     return self;
+}
 
+- (void)updateAudioSamples:(short[2][512])samples {
+    NSTimeInterval curr = [[NSDate date] timeIntervalSince1970];
+    if (curr != _timestamp) {
+        _timestamp = curr;
+        memcpy(_samples, samples, sizeof(samples));
+        _samplesUpdated = TRUE;
+    } else{
+        _samplesUpdated = FALSE;
+    }
 }
 
 - (void)setup:(CGRect)frame context:(EAGLContext *)context {
@@ -95,8 +101,6 @@
 
     // alloc video buffer
     _goomObject = [[GoomObject alloc] initWithWidth:(uint32_t) size.width height:(uint32_t) size.height];
-    _videoBuffer = (uint32_t*)malloc(size.width * size.height * 4);
-    [_goomObject setScreenBuffer:_videoBuffer];
 
     // Init front and back mapped textures
     _mainTexture = [OGLESMappedTexture oGLESMappedTexture:context];
@@ -111,9 +115,11 @@
     // the first frame will be rendered in a GCD thread and the frame data will
     // not be changed until the background decode operation has completed.
     [_mainTexture lockTexture];
-    [_mainTexture copyFlatPixelsIntoBuffer:_videoBuffer];
+    [_mainTexture copyFlatPixelsIntoBuffer:_goomObject.videoBuffer];
     [_mainTexture unlockTexture];
     _mainTexture.isReady = TRUE;
+    _timestamp = [[NSDate date] timeIntervalSince1970];
+    _samplesUpdated = TRUE;
 
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerCallback:) userInfo:nil repeats:YES];
     [_timer fire];
@@ -130,7 +136,7 @@
 
 - (void) timerCallback:(NSTimer*)timer {
 
-    if (!_mainTexture.isReady && !_rendering) {
+    if (_samplesUpdated && !_mainTexture.isReady && !_rendering) {
         [self renderSamples];
     }
 
@@ -149,7 +155,7 @@
             ^{
                 [goomObjectRef update:_samples];
 
-                [mappedTextureRef copyFlatPixelsIntoBuffer:_videoBuffer];
+                [mappedTextureRef copyFlatPixelsIntoBuffer:goomObjectRef.videoBuffer];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     bool worked = [mappedTextureRef unlockTexture];

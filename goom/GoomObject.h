@@ -10,9 +10,9 @@
 
 @interface GoomObject : NSObject
 
-- (id) initWithWidth:(uint) width height:(uint)height;
+@property(nonatomic, readonly) uint32_t* videoBuffer;
 
-- (void) setScreenBuffer:(void *)buffer;
+- (id) initWithWidth:(uint) width height:(uint)height;
 
 - (void) update:(short[2][512]) data;
 

@@ -11,7 +11,7 @@
 
 @interface GoomObject() {
     PluginInfo* _pluginInfo;
-    void* _screenBuffer;
+    uint32_t* _videoBuffer;
 }
 
 - (id) init;
@@ -19,6 +19,7 @@
 @end
 
 @implementation GoomObject
+@synthesize videoBuffer = _videoBuffer;
 
 - (void) dealloc {
     [self close];
@@ -28,6 +29,8 @@
     self = [super init];
     if (self) {
         _pluginInfo = goom_init(320, 240);
+        _videoBuffer = malloc(320 * 240 * 4);
+        goom_set_screenbuffer(_pluginInfo, _videoBuffer);
     }
     
     return self;
@@ -37,15 +40,11 @@
     self = [super init];
     if (self) {
         _pluginInfo = goom_init(width, height);
+        _videoBuffer = malloc(width * height * 4);
+        goom_set_screenbuffer(_pluginInfo, _videoBuffer);
     }
     
     return self;
-}
-
-- (void) setScreenBuffer:(void *)buffer {
-    if (_pluginInfo != NULL) {
-        goom_set_screenbuffer(_pluginInfo, buffer);
-    }
 }
 
 - (void) update:(short [2][512]) data {

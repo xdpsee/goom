@@ -7,10 +7,10 @@
 //
 
 #import "TestController.h"
-#import "TestView.h"
+#import "GoomView.h"
 
 @interface TestController () {
-    TestView* _testView;
+    GoomView* _testView;
     UIButton * _buttonBack;
     EAGLContext *_context;
 }
@@ -46,7 +46,7 @@
         NSLog(@"Failed to create ES context");
     }
 
-    _testView = [[TestView alloc] initWithFrame:CGRectMake(21, 41, 320, 240) context:_context];
+    _testView = [[GoomView alloc] initWithFrame:CGRectMake(21, 41, 320, 240) context:_context];
 
     [self.view addSubview:_testView];
 

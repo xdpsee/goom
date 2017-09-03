@@ -6,9 +6,12 @@
 #import <GLKit/GLKit.h>
 
 
-@interface TestView : GLKView<GLKViewDelegate>
+@interface GoomView : GLKView<GLKViewDelegate>
 
 - (instancetype) initWithFrame:(CGRect)frame context:(EAGLContext *)context;
 
+- (void) updateAudioSamples:(short[2][512]) samples;
 
 @end
+
+
