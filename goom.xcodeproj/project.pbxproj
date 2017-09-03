@@ -80,6 +80,7 @@
 		28CD98251F5AAE6E0038A92E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CD98241F5AAE6E0038A92E /* MediaPlayer.framework */; };
 		28CD98281F5AAF2C0038A92E /* Superpowered.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CD98271F5AAF2C0038A92E /* Superpowered.mm */; };
 		28CD98291F5AB0450038A92E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CD98181F5AAACD0038A92E /* CoreMedia.framework */; };
+		56E8097D88AD5F85051CE176 /* EAGLContextRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -234,6 +235,8 @@
 		28CD98241F5AAE6E0038A92E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		28CD98261F5AAF2C0038A92E /* Superpowered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superpowered.h; sourceTree = "<group>"; };
 		28CD98271F5AAF2C0038A92E /* Superpowered.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Superpowered.mm; sourceTree = "<group>"; };
+		56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLContextRenderer.mm; sourceTree = "<group>"; };
+		56E80F37A1D1FA2DE8D5E935 /* EAGLContextRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLContextRenderer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +305,8 @@
 				28B3D10C1A5FFA8100372D98 /* GoomViewController.h */,
 				28B3D10D1A5FFA8100372D98 /* GoomViewController.mm */,
 				2803DB191A58FD07004AB2FF /* ViewController.m */,
+				56E80F37A1D1FA2DE8D5E935 /* EAGLContextRenderer.h */,
+				56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */,
 			);
 			path = goom;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				2803DD421A5BF4C1004AB2FF /* OGLESObjects.m in Sources */,
 				2803DC271A598831004AB2FF /* pngwio.c in Sources */,
 				2803DCF41A598C7D004AB2FF /* goomsl_yacc.c in Sources */,
+				56E8097D88AD5F85051CE176 /* EAGLContextRenderer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
