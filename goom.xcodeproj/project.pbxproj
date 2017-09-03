@@ -67,7 +67,6 @@
 		28B3D0421A5D7FA000372D98 /* Dangerous.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28B3D03F1A5D7FA000372D98 /* Dangerous.mp3 */; };
 		28B3D10A1A5FF61A00372D98 /* config.cfg in Resources */ = {isa = PBXBuildFile; fileRef = 28B3D1081A5FF61A00372D98 /* config.cfg */; };
 		28B3D10B1A5FF61A00372D98 /* Presets in Resources */ = {isa = PBXBuildFile; fileRef = 28B3D1091A5FF61A00372D98 /* Presets */; };
-		28B3D10E1A5FFA8100372D98 /* GoomViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B3D10D1A5FFA8100372D98 /* GoomViewController.mm */; };
 		28CD980E1F5AA6980038A92E /* libSuperpoweredAudioIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CD97EB1F5AA6980038A92E /* libSuperpoweredAudioIOS.a */; };
 		28CD980F1F5AA6980038A92E /* SuperpoweredIOSAudioIO.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CD97FD1F5AA6980038A92E /* SuperpoweredIOSAudioIO.mm */; };
 		28CD98101F5AA6980038A92E /* SuperpoweredNBandEQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CD98001F5AA6980038A92E /* SuperpoweredNBandEQ.cpp */; };
@@ -81,7 +80,6 @@
 		28CD98281F5AAF2C0038A92E /* Superpowered.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CD98271F5AAF2C0038A92E /* Superpowered.mm */; };
 		28CD98291F5AB0450038A92E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CD98181F5AAACD0038A92E /* CoreMedia.framework */; };
 		56E80036BBE63EEBBC158DEB /* TestView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E80A0184F2214FD0E9FB8D /* TestView.mm */; };
-		56E807023D7C666761BEF332 /* GoomView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E8085F85F351D146F322DF /* GoomView.mm */; };
 		56E8097D88AD5F85051CE176 /* EAGLContextRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */; };
 		56E80B376857974DFF453A9B /* TestController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E8095900DBCCDB950A3189 /* TestController.mm */; };
 /* End PBXBuildFile section */
@@ -194,8 +192,6 @@
 		28B3D03F1A5D7FA000372D98 /* Dangerous.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dangerous.mp3; sourceTree = "<group>"; };
 		28B3D1081A5FF61A00372D98 /* config.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.cfg; sourceTree = "<group>"; };
 		28B3D1091A5FF61A00372D98 /* Presets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Presets; sourceTree = "<group>"; };
-		28B3D10C1A5FFA8100372D98 /* GoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoomViewController.h; sourceTree = "<group>"; };
-		28B3D10D1A5FFA8100372D98 /* GoomViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoomViewController.mm; sourceTree = "<group>"; };
 		28CD97EB1F5AA6980038A92E /* libSuperpoweredAudioIOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSuperpoweredAudioIOS.a; path = goom/SupperpoweredSDK/libSuperpoweredAudioIOS.a; sourceTree = "<group>"; };
 		28CD97EC1F5AA6980038A92E /* Superpowered3BandEQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Superpowered3BandEQ.h; path = goom/SupperpoweredSDK/Superpowered3BandEQ.h; sourceTree = "<group>"; };
 		28CD97ED1F5AA6980038A92E /* SuperpoweredAdvancedAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SuperpoweredAdvancedAudioPlayer.h; path = goom/SupperpoweredSDK/SuperpoweredAdvancedAudioPlayer.h; sourceTree = "<group>"; };
@@ -238,9 +234,7 @@
 		28CD98241F5AAE6E0038A92E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		28CD98261F5AAF2C0038A92E /* Superpowered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Superpowered.h; sourceTree = "<group>"; };
 		28CD98271F5AAF2C0038A92E /* Superpowered.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Superpowered.mm; sourceTree = "<group>"; };
-		56E801B6972B15852FB9897B /* GoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoomView.h; sourceTree = "<group>"; };
 		56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAGLContextRenderer.mm; sourceTree = "<group>"; };
-		56E8085F85F351D146F322DF /* GoomView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GoomView.mm; sourceTree = "<group>"; };
 		56E8095900DBCCDB950A3189 /* TestController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestController.mm; sourceTree = "<group>"; };
 		56E809BE007BFE97C612FA6E /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		56E80A0184F2214FD0E9FB8D /* TestView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestView.mm; sourceTree = "<group>"; };
@@ -311,13 +305,9 @@
 				2803DB111A58FD07004AB2FF /* Supporting Files */,
 				2803DD451A5C32DB004AB2FF /* Thriller.mp3 */,
 				2803DB181A58FD07004AB2FF /* ViewController.h */,
-				28B3D10C1A5FFA8100372D98 /* GoomViewController.h */,
-				28B3D10D1A5FFA8100372D98 /* GoomViewController.mm */,
 				2803DB191A58FD07004AB2FF /* ViewController.m */,
 				56E80F37A1D1FA2DE8D5E935 /* EAGLContextRenderer.h */,
 				56E80761D4FCBBF034E376E2 /* EAGLContextRenderer.mm */,
-				56E8085F85F351D146F322DF /* GoomView.mm */,
-				56E801B6972B15852FB9897B /* GoomView.h */,
 				56E809BE007BFE97C612FA6E /* TestController.h */,
 				56E8095900DBCCDB950A3189 /* TestController.mm */,
 				56E80A0184F2214FD0E9FB8D /* TestView.mm */,
@@ -620,7 +610,6 @@
 				2803DCF61A598C7D004AB2FF /* graphic.c in Sources */,
 				2803DCFD1A598C7D004AB2FF /* plugin_info.c in Sources */,
 				2803DCF81A598C7D004AB2FF /* jitc_x86.c in Sources */,
-				28B3D10E1A5FFA8100372D98 /* GoomViewController.mm in Sources */,
 				2803DCE91A598C7D004AB2FF /* drawmethods.c in Sources */,
 				28CD98281F5AAF2C0038A92E /* Superpowered.mm in Sources */,
 				2803DCF11A598C7D004AB2FF /* goomsl_hash.c in Sources */,
@@ -635,7 +624,6 @@
 				2803DC271A598831004AB2FF /* pngwio.c in Sources */,
 				2803DCF41A598C7D004AB2FF /* goomsl_yacc.c in Sources */,
 				56E8097D88AD5F85051CE176 /* EAGLContextRenderer.mm in Sources */,
-				56E807023D7C666761BEF332 /* GoomView.mm in Sources */,
 				56E80B376857974DFF453A9B /* TestController.mm in Sources */,
 				56E80036BBE63EEBBC158DEB /* TestView.mm in Sources */,
 			);
