@@ -1,5 +1,5 @@
-#include "png.h"
 #include <stdlib.h>
+#include "png.h"
 
 int loadpng (char *file_name, int *w, int *h, unsigned int ***buf)
 {
@@ -108,7 +108,7 @@ int loadpng (char *file_name, int *w, int *h, unsigned int ***buf)
 	rowbytes = png_get_rowbytes (png_ptr, info_ptr);
 //      printf ("rowbytes : %d\n", rowbytes);
 
-	row_pointers = (unsigned int **) malloc ((size_t)height * sizeof (unsigned int *));
+	row_pointers = (unsigned int **) malloc (height * sizeof (unsigned int *));
 
 	for (y = 0; y < height; y++)
 		row_pointers[y] = (unsigned int *) malloc (4 * width);

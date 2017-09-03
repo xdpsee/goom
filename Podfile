@@ -1,6 +1,2 @@
-platform :ios, '9.0'
-workspace 'goom.xcworkspace'
-
-target 'goom' do
-
-end
+platform :ios, '7.0'
+pod 'TheAmazingAudioEngine', '~> 1.4.5'

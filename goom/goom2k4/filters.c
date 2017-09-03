@@ -541,8 +541,8 @@ void zoomFilterFastRGB (PluginInfo *goomInfo, Pixel * pix1, Pixel * pix2, ZoomFi
         if (data->brutT) free (data->freebrutT);
         data->brutT = 0;
         
-        data->middleX = resx >> 1;
-        data->middleY = resy >> 1;
+        data->middleX = resx / 2;
+        data->middleY = resy / 2;
         data->mustInitBuffers = 1;
         if (data->firedec) free (data->firedec);
         data->firedec = 0;
@@ -571,14 +571,14 @@ void zoomFilterFastRGB (PluginInfo *goomInfo, Pixel * pix1, Pixel * pix2, ZoomFi
     if (data->mustInitBuffers) {
         
         data->mustInitBuffers = 0;
-        data->freebrutS = (signed int *) calloc ((resx * resy << 1) + 128, sizeof(unsigned int));
-        data->brutS = (gint32 *) ((1 + (((uintptr_t) (data->freebrutS)) >> 7)) << 7);
+        data->freebrutS = (signed int *) calloc (resx * resy * 2 + 128, sizeof(unsigned int));
+        data->brutS = (gint32 *) ((1 + ((uintptr_t) (data->freebrutS)) / 128) * 128);
         
-        data->freebrutD = (signed int *) calloc ((resx * resy << 1) + 128, sizeof(unsigned int));
-        data->brutD = (gint32 *) ((1 + (((uintptr_t) (data->freebrutD)) >> 7)) << 7);
+        data->freebrutD = (signed int *) calloc (resx * resy * 2 + 128, sizeof(unsigned int));
+        data->brutD = (gint32 *) ((1 + ((uintptr_t) (data->freebrutD)) / 128) * 128);
         
-        data->freebrutT = (signed int *) calloc ((resx * resy << 1) + 128, sizeof(unsigned int));
-        data->brutT = (gint32 *) ((1 + (((uintptr_t) (data->freebrutT)) >> 7)) << 7);
+        data->freebrutT = (signed int *) calloc (resx * resy * 2 + 128, sizeof(unsigned int));
+        data->brutT = (gint32 *) ((1 + ((uintptr_t) (data->freebrutT)) / 128) * 128);
         
         data->buffratio = 0;
         
@@ -624,7 +624,7 @@ void zoomFilterFastRGB (PluginInfo *goomInfo, Pixel * pix1, Pixel * pix2, ZoomFi
     if (data->interlace_start>=0)
     {
         /* creation de la nouvelle destination */
-        makeZoomBufferStripe(data,resy >> 4);
+        makeZoomBufferStripe(data,resy/16);
     }
     
     if (switchIncr != 0) {

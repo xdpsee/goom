@@ -8,7 +8,7 @@
 #import "OGLESObjects.h"
 
 #import <GLKit/GLKit.h>
-#import <OpenGLES/ES2/glext.h>
+#include <OpenGLES/ES2/glext.h>
 
 // declaration for OGLESMappedTexture
 

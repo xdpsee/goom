@@ -3,8 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict />
+	<dict>
+		<key>Pods-TheAmazingAudioEngine.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict />
+	<dict>
+		<key>762A26399B1B44938DAA36DE</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+		<key>AAB43CF836E84D13B7DC4CA6</key>
+		<dict>
+			<key>primary</key>
+			<true />
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -77,7 +77,8 @@
     NSTimeInterval curr = [[NSDate date] timeIntervalSince1970];
     if (curr != _timestamp) {
         _timestamp = curr;
-        memcpy(_samples, samples, sizeof(samples));
+        memcpy(&_samples[0], &samples[0], 512);
+        memcpy(&_samples[1], &samples[1], 512);
         _samplesUpdated = TRUE;
     } else{
         _samplesUpdated = FALSE;

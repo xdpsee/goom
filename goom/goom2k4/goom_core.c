@@ -155,8 +155,8 @@ guint32 *goom_update (PluginInfo *goomInfo, gint16 data[2][512],
     ZoomFilterData *pzfd;
     
     /* test if the config has changed, update it if so */
-    pointWidth = (goomInfo->screen.width << 1) / 5;
-    pointHeight = ((goomInfo->screen.height) << 1) / 5;
+    pointWidth = (goomInfo->screen.width * 2) / 5;
+    pointHeight = ((goomInfo->screen.height) * 2) / 5;
     
     /* ! etude du signal ... */
     evaluate_sound (data, &(goomInfo->sound));
@@ -736,8 +736,7 @@ guint32 *goom_update (PluginInfo *goomInfo, gint16 data[2][512],
         /* affichage et swappage des buffers.. */
         goomInfo->cycle++;
         
-        //goomInfo->convolve_fx.apply(&goomInfo->convolve_fx,return_val,goomInfo->outputBuf,goomInfo);
-        memcpy(goomInfo->outputBuf, return_val, goomInfo->screen.size * sizeof(Pixel)); //The convolve filter looks ugly
+        goomInfo->convolve_fx.apply(&goomInfo->convolve_fx,return_val,goomInfo->outputBuf,goomInfo);
         
         return (guint32*)goomInfo->outputBuf;
 }
