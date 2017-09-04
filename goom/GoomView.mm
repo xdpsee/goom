@@ -122,7 +122,7 @@
     _timestamp = [[NSDate date] timeIntervalSince1970];
     _samplesUpdated = TRUE;
 
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerCallback:) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerCallback:) userInfo:nil repeats:YES];
     [_timer fire];
 }
 
@@ -133,14 +133,17 @@
         _mainTexture.isReady = FALSE;
     }
 
+    if (!_mainTexture.isReady && !_rendering) {
+        [self renderSamples];
+    }
 }
 
 - (void) timerCallback:(NSTimer*)timer {
 
-    if (_samplesUpdated && !_mainTexture.isReady && !_rendering) {
-        [self renderSamples];
-    }
-
+//    if (!_mainTexture.isReady && !_rendering) {
+//        [self renderSamples];
+//    }
+    
 }
 
 - (void) renderSamples {
@@ -169,8 +172,8 @@
                     // of the texture that just finished loading.
 
                     [self display];
-
-                    [self renderSamples];
+                    
+                    //[self renderSamples];
                 });
             });
 
