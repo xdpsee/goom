@@ -11,13 +11,12 @@
     GoomObject *_goomObject;
     EAGLContextRenderer *_eaglContextRenderer;
     OGLESMappedTexture *_mainTexture;
+    OGLESMappedTexture *_backupTexture;
 
     short _samples[2][512];
 
-    NSTimer* _timer;
     BOOL _rendering;
     NSTimeInterval _timestamp;
-    BOOL _samplesUpdated;
 }
 
 - (instancetype)init;
@@ -32,13 +31,12 @@
 
 
 - (void)dealloc {
-
-    [_timer invalidate];
-    _timer = nil;
-
     _mainTexture.isReady = FALSE;
     _mainTexture = nil;
-    _mainTexture = nil;
+    
+    _backupTexture.isReady = FALSE;
+    _backupTexture = nil;
+    
 
     [_goomObject close];
     _goomObject = nil;
@@ -74,15 +72,12 @@
 }
 
 - (void)updateAudioSamples:(short[2][512])samples {
-    NSTimeInterval curr = [[NSDate date] timeIntervalSince1970];
-    if (curr != _timestamp) {
-        _timestamp = curr;
+    //NSTimeInterval curr = [[NSDate date] timeIntervalSince1970];
+    //if (curr != _timestamp) {
+        //_timestamp = curr;
         memcpy(&_samples[0], &samples[0], 512);
         memcpy(&_samples[1], &samples[1], 512);
-        _samplesUpdated = TRUE;
-    } else{
-        _samplesUpdated = FALSE;
-    }
+    //}
 }
 
 - (void)setup:(CGRect)frame context:(EAGLContext *)context {
@@ -105,10 +100,13 @@
 
     // Init front and back mapped textures
     _mainTexture = [OGLESMappedTexture oGLESMappedTexture:context];
+    _backupTexture = [OGLESMappedTexture oGLESMappedTexture:context];
 
     BOOL worked = [_mainTexture makeMappedTexture:size];
     NSAssert(worked, @"makeMappedTexture failed");
-
+    worked = [_backupTexture makeMappedTexture:size];
+    NSAssert(worked, @"makeMappedTexture failed");
+    
     // The very first time the view controller is loaded, render the initial frame
     // of the texture as a blocking operation in the main thread. This is required
     // since the view needs to have an initial state that will be rendered the
@@ -120,44 +118,46 @@
     [_mainTexture unlockTexture];
     _mainTexture.isReady = TRUE;
     _timestamp = [[NSDate date] timeIntervalSince1970];
-    _samplesUpdated = TRUE;
-
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerCallback:) userInfo:nil repeats:YES];
-    [_timer fire];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
 
+    OGLESMappedTexture* mappedTexture = nil;
     if (_mainTexture.isReady) {
-        [_eaglContextRenderer render:_mainTexture to:view inRect:rect];
-        _mainTexture.isReady = FALSE;
+        mappedTexture = _mainTexture;
+    } else if (_backupTexture.isReady) {
+        mappedTexture = _backupTexture;
     }
 
-    if (!_mainTexture.isReady && !_rendering) {
+    [_eaglContextRenderer render:mappedTexture to:view inRect:rect];
+
+    if (!_rendering) {
+        // Start loading the next texture as soon as the previous one is
+        // done, since we are sure that the next render call will make use
+        // of the texture that just finished loading.
         [self renderSamples];
     }
-}
-
-- (void) timerCallback:(NSTimer*)timer {
-
-//    if (!_mainTexture.isReady && !_rendering) {
-//        [self renderSamples];
-//    }
-    
 }
 
 - (void) renderSamples {
 
     _rendering = TRUE;
-    __block OGLESMappedTexture *mappedTextureRef = _mainTexture;
+
+    __block OGLESMappedTexture *mappedTextureRef;
+    if (_mainTexture.isReady) {
+        mappedTextureRef = _backupTexture;
+    } else if (_backupTexture.isReady){
+        mappedTextureRef = _mainTexture;;
+    }
+    
     bool worked = [mappedTextureRef lockTexture];
     NSAssert(worked, @"lockTexture");
 
-
+    __block GoomView* selfRef = self;
     __block GoomObject *goomObjectRef = _goomObject;
     dispatch_async(dispatch_get_global_queue(0, 0),
             ^{
-                [goomObjectRef update:_samples];
+                [goomObjectRef update:selfRef->_samples];
 
                 [mappedTextureRef copyFlatPixelsIntoBuffer:goomObjectRef.videoBuffer];
 
@@ -165,15 +165,19 @@
                     bool worked = [mappedTextureRef unlockTexture];
                     NSAssert(worked, @"unlockTexture");
 
-                    _rendering = FALSE;
                     mappedTextureRef.isReady = TRUE;
-                    // Start loading the next texture as soon as the previous one is
-                    // done, since we are sure that the next render call will make use
-                    // of the texture that just finished loading.
+
+                    if (mappedTextureRef == selfRef->_mainTexture) {
+                        selfRef->_backupTexture.isReady = FALSE;
+                    } else if (mappedTextureRef == selfRef->_backupTexture) {
+                        selfRef->_mainTexture.isReady = FALSE;
+                    } else {
+                        NSAssert(FALSE, @"neither texture matched");
+                    }
+
+                    selfRef->_rendering = FALSE;
 
                     [self display];
-                    
-                    //[self renderSamples];
                 });
             });
 

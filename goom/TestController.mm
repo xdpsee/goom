@@ -61,7 +61,7 @@ static short samples[2][512];
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor magentaColor];
+    self.view.backgroundColor = [UIColor darkGrayColor];
 
     _buttonBack = [UIButton buttonWithType:UIButtonTypeCustom];
     [_buttonBack setTitle:@"Back" forState:UIControlStateNormal];
@@ -76,7 +76,7 @@ static short samples[2][512];
         NSLog(@"Failed to create ES context");
     }
 
-    _testView = [[GoomView alloc] initWithFrame:CGRectMake(0, 20, 375, 282) context:_context];
+    _testView = [[GoomView alloc] initWithFrame:CGRectMake(0, 20, 320, 240) context:_context];
 
     [self.view addSubview:_testView];
 
